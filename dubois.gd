@@ -1,4 +1,5 @@
 extends Node2D
+class_name Dubois
 
 @onready var sprite : Sprite2D = find_child("Sprite")
 

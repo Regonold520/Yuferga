@@ -19,3 +19,9 @@ func loadData(newId):
 	value = myData["value"]
 	
 	sprite.texture = load("res://sprites/shweckles/"+id+"_shweckle.png")
+
+func _process(delta: float) -> void:
+	position.y += (delta*30) * fallSpeed
+	
+	if position.y > 210.0:
+		queue_free()

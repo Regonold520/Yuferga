@@ -1,10 +1,20 @@
 [gd_scene format=3 uid="uid://c3fio4qxsj3r7"]
 
+[ext_resource type="Texture2D" uid="uid://caregdi31d5m3" path="res://cross.png" id="1_7mycd"]
 [ext_resource type="Script" uid="uid://crqvrjamjor5s" path="res://dubois.gd" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://b10voshpnrwkm" path="res://sprites/dubois.png" id="1_ig7tw"]
 [ext_resource type="FontFile" uid="uid://dbte4566h4ald" path="res://Daydream DEMO.otf" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://c3aqai0kfh4l2" path="res://sprites/shweckles/blue_shweckle.png" id="4_lquwl"]
 [ext_resource type="Script" uid="uid://d4hs644f3hwsq" path="res://shweckle_manager.gd" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://bsy48d3d3th24" path="res://dubling_manager.gd" id="7_272bh"]
+[ext_resource type="Texture2D" uid="uid://bnch36frt4mb0" path="res://sprites/dubling.png" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://5roun8w1ckry" path="res://dubling.gd" id="8_kek77"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sclpf"]
+size = Vector2(640, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfl3o"]
+size = Vector2(11, 19)
 
 [node name="Main" type="Node2D" unique_id=2100775180]
 
@@ -13,11 +23,25 @@ z_index = 28
 zoom = Vector2(1.8, 1.8)
 
 [node name="BG" type="ColorRect" parent="." unique_id=1063822170]
+z_index = -11
 offset_left = -589.0
 offset_top = -332.0
 offset_right = 591.0
 offset_bottom = 338.0
+mouse_filter = 2
 color = Color(0.13725491, 0.46666667, 0.25490198, 1)
+
+[node name="BG2" type="TextureRect" parent="." unique_id=1946982243]
+modulate = Color(0.12586772, 0.4339702, 0.2357288, 1)
+z_index = -11
+offset_left = -326.0
+offset_top = -189.0
+offset_right = -161.90659
+offset_bottom = -94.43768
+scale = Vector2(3.9550638, 3.9550638)
+mouse_filter = 2
+texture = ExtResource("1_7mycd")
+stretch_mode = 1
 
 [node name="Dubois" type="Node2D" parent="." unique_id=256336875]
 position = Vector2(266.00003, 112.999985)
@@ -28,6 +52,7 @@ script = ExtResource("1_h2yge")
 texture = ExtResource("1_ig7tw")
 
 [node name="Text" type="RichTextLabel" parent="Dubois" unique_id=666296621]
+z_index = 85
 clip_contents = false
 offset_left = -194.40001
 offset_top = -83.6
@@ -46,9 +71,40 @@ scroll_active = false
 horizontal_alignment = 1
 
 [node name="BlueShweckle" type="Sprite2D" parent="." unique_id=1903219480]
-position = Vector2(0.9999924, 97)
+position = Vector2(-299, 200)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("4_lquwl")
 
 [node name="ShweckleManager" type="Node2D" parent="." unique_id=726594760]
 script = ExtResource("5_7mycd")
+
+[node name="SpawnTimer" type="Timer" parent="ShweckleManager" unique_id=1276951277]
+autostart = true
+
+[node name="DublingManager" type="Node2D" parent="." unique_id=200835837]
+script = ExtResource("7_272bh")
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=1415762330]
+position = Vector2(0, 196)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=753863134]
+shape = SubResource("RectangleShape2D_sclpf")
+
+[node name="Dubling" type="CharacterBody2D" parent="." unique_id=455646070]
+position = Vector2(114.00001, -5.9999847)
+scale = Vector2(2.5, 2.5)
+input_pickable = true
+script = ExtResource("8_kek77")
+
+[node name="Collider" type="CollisionShape2D" parent="Dubling" unique_id=1324162453]
+shape = SubResource("RectangleShape2D_lfl3o")
+
+[node name="Sprite" type="Sprite2D" parent="Dubling" unique_id=64397479]
+texture = ExtResource("8_5vw27")
+
+[node name="TickTimer" type="Timer" parent="Dubling" unique_id=644618934]
+autostart = true
+
+[connection signal="input_event" from="Dubling" to="Dubling" method="_on_input_event"]
+[connection signal="mouse_entered" from="Dubling" to="Dubois" method="_on_dubling_mouse_entered"]
+[connection signal="mouse_entered" from="Dubling" to="Dubling" method="_on_mouse_entered"]

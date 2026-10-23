@@ -2,6 +2,9 @@ extends Node
 
 var shweckleData : Dictionary
 
+@onready var shweckleManager : ShweckleManager = get_tree().current_scene.find_child("ShweckleManager")
+@onready var dublingManager : DublingManager = get_tree().current_scene.find_child("DublingManager")
+
 func _ready() -> void:
 	shweckleData = parse_json_path("res://datastore/shweckleData.json")
 

@@ -6,5 +6,9 @@
 	"green": {
 		"value": 5,
 		"fallSpeed": 3
+	},
+	"hat": {
+		"value": 10,
+		"fallSpeed": 6
 	}
 }
