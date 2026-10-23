@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c3fio4qxsj3r7"]
+
+[ext_resource type="Script" uid="uid://crqvrjamjor5s" path="res://dubois.gd" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://b10voshpnrwkm" path="res://sprites/dubois.png" id="1_ig7tw"]
+[ext_resource type="FontFile" uid="uid://dbte4566h4ald" path="res://Daydream DEMO.otf" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://c3aqai0kfh4l2" path="res://sprites/shweckles/blue_shweckle.png" id="4_lquwl"]
+[ext_resource type="Script" uid="uid://d4hs644f3hwsq" path="res://shweckle_manager.gd" id="5_7mycd"]
+
+[node name="Main" type="Node2D" unique_id=2100775180]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=459705573]
+z_index = 28
+zoom = Vector2(1.8, 1.8)
+
+[node name="BG" type="ColorRect" parent="." unique_id=1063822170]
+offset_left = -589.0
+offset_top = -332.0
+offset_right = 591.0
+offset_bottom = 338.0
+color = Color(0.13725491, 0.46666667, 0.25490198, 1)
+
+[node name="Dubois" type="Node2D" parent="." unique_id=256336875]
+position = Vector2(266.00003, 112.999985)
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_h2yge")
+
+[node name="Sprite" type="Sprite2D" parent="Dubois" unique_id=459963429]
+texture = ExtResource("1_ig7tw")
+
+[node name="Text" type="RichTextLabel" parent="Dubois" unique_id=666296621]
+clip_contents = false
+offset_left = -194.40001
+offset_top = -83.6
+offset_right = 111.2
+offset_bottom = 55.599983
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(152.8, 69.6)
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(0.99607843, 0.7529412, 0.14509805, 1)
+theme_override_colors/font_outline_color = Color(0.5176471, 0.3764706, 0.05882353, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("2_0xm2m")
+theme_override_font_sizes/normal_font_size = 16
+text = "Hello its me Dubois here to save the day!"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="BlueShweckle" type="Sprite2D" parent="." unique_id=1903219480]
+position = Vector2(0.9999924, 97)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("4_lquwl")
+
+[node name="ShweckleManager" type="Node2D" parent="." unique_id=726594760]
+script = ExtResource("5_7mycd")

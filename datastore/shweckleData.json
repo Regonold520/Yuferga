@@ -1,0 +1,10 @@
+{
+	"blue": {
+		"value": 1,
+		"fallSpeed": 1
+	},
+	"green": {
+		"value": 5,
+		"fallSpeed": 3
+	}
+}
