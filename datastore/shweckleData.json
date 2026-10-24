@@ -4,11 +4,11 @@
 		"fallSpeed": 1
 	},
 	"green": {
-		"value": 5,
+		"value": 1,
 		"fallSpeed": 3
 	},
 	"hat": {
-		"value": 10,
+		"value": 1,
 		"fallSpeed": 6
 	}
 }

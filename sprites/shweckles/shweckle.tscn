@@ -1,9 +1,20 @@
 [gd_scene format=3 uid="uid://cie0ptmr38vn2"]
 
 [ext_resource type="Script" uid="uid://dlpo0ao34s2sl" path="res://sprites/shweckles/shweckle.gd" id="1_dwcka"]
+[ext_resource type="Texture2D" uid="uid://dhn2j83qj13bm" path="res://sprites/shweckles/pink_shweckle.png" id="2_cukmw"]
 
-[node name="Shweckle" type="Node2D" unique_id=567169321]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sclpf"]
+size = Vector2(14.4, 8.799999)
+
+[node name="Shweckle" type="Area2D" unique_id=1331123343]
 scale = Vector2(2.5, 2.5)
 script = ExtResource("1_dwcka")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1768377709]
+texture = ExtResource("2_cukmw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=592421450]
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_sclpf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

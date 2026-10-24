@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bnli8c86rfio4"]
+
+[ext_resource type="Script" uid="uid://5roun8w1ckry" path="res://dubling.gd" id="1_g7oj5"]
+[ext_resource type="Texture2D" uid="uid://bnch36frt4mb0" path="res://sprites/dubling.png" id="2_tkbcm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfl3o"]
+size = Vector2(11, 19)
+
+[node name="Dubling" type="CharacterBody2D" unique_id=1144231856]
+scale = Vector2(2.5, 2.5)
+collision_mask = 2
+input_pickable = true
+script = ExtResource("1_g7oj5")
+
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=1862166761]
+position = Vector2(0, -9.5)
+shape = SubResource("RectangleShape2D_lfl3o")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1346510928]
+texture = ExtResource("2_tkbcm")
+
+[node name="TickTimer" type="Timer" parent="." unique_id=191429307]
+autostart = true
+
+[node name="RechargeTimer" type="Timer" parent="." unique_id=603174895]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

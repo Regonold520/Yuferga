@@ -1,26 +1,153 @@
 [gd_scene format=3 uid="uid://c3fio4qxsj3r7"]
 
+[ext_resource type="Script" uid="uid://bj5gfmxep03iv" path="res://shweckle_display.gd" id="1_4c57u"]
 [ext_resource type="Texture2D" uid="uid://caregdi31d5m3" path="res://cross.png" id="1_7mycd"]
 [ext_resource type="Script" uid="uid://crqvrjamjor5s" path="res://dubois.gd" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://b10voshpnrwkm" path="res://sprites/dubois.png" id="1_ig7tw"]
 [ext_resource type="FontFile" uid="uid://dbte4566h4ald" path="res://Daydream DEMO.otf" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://b1panvyo7836j" path="res://sprites/clock.png" id="4_efxa6"]
 [ext_resource type="Texture2D" uid="uid://c3aqai0kfh4l2" path="res://sprites/shweckles/blue_shweckle.png" id="4_lquwl"]
+[ext_resource type="Script" uid="uid://k5v5dioattgp" path="res://clock_display.gd" id="4_w48qg"]
 [ext_resource type="Script" uid="uid://d4hs644f3hwsq" path="res://shweckle_manager.gd" id="5_7mycd"]
+[ext_resource type="Texture2D" uid="uid://bql83gnu2g7g7" path="res://sprites/clock_topper.png" id="5_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://b2kwr0pw345el" path="res://sprites/clock_hand.png" id="6_w48qg"]
 [ext_resource type="Script" uid="uid://bsy48d3d3th24" path="res://dubling_manager.gd" id="7_272bh"]
-[ext_resource type="Texture2D" uid="uid://bnch36frt4mb0" path="res://sprites/dubling.png" id="8_5vw27"]
-[ext_resource type="Script" uid="uid://5roun8w1ckry" path="res://dubling.gd" id="8_kek77"]
+[ext_resource type="Script" uid="uid://d4f1c3o7fkbdk" path="res://dubling_pipe.gd" id="8_vivmo"]
+[ext_resource type="Texture2D" uid="uid://dgf3bsrvve5kp" path="res://sprites/pipe_front.png" id="9_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://yr3fs7njvvh3" path="res://sprites/pipe_back.png" id="10_yaehf"]
+[ext_resource type="Texture2D" uid="uid://cv2e3ki5kug40" path="res://sprites/pipe_popup.png" id="11_2cqfq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmqpt"]
+size = Vector2(32.800034, 22.400002)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sclpf"]
 size = Vector2(640, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfl3o"]
-size = Vector2(11, 19)
-
 [node name="Main" type="Node2D" unique_id=2100775180]
+metadata/_edit_horizontal_guides_ = [-196.0]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=459705573]
 z_index = 28
 zoom = Vector2(1.8, 1.8)
+
+[node name="ShweckleDisplay" type="Node2D" parent="Camera2D" unique_id=1369439118]
+position = Vector2(267.00003, -154)
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_4c57u")
+
+[node name="Shweckle" type="Sprite2D" parent="Camera2D/ShweckleDisplay" unique_id=223480909]
+texture = ExtResource("4_lquwl")
+
+[node name="Text" type="RichTextLabel" parent="Camera2D/ShweckleDisplay" unique_id=421129065]
+z_index = 85
+clip_contents = false
+offset_left = -15.200001
+offset_top = 1.5999938
+offset_right = 132.0
+offset_bottom = 49.599987
+scale = Vector2(0.22758235, 0.22758235)
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(0.92941177, 0.84705883, 0.75686276, 1)
+theme_override_colors/font_outline_color = Color(0.55437607, 0.47919947, 0.40385404, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("2_0xm2m")
+theme_override_font_sizes/normal_font_size = 24
+text = "X2"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
+
+[node name="ClockDisplay" type="Node2D" parent="Camera2D" unique_id=1839610101]
+position = Vector2(-266.99997, -130.99998)
+scale = Vector2(2.5, 2.5)
+script = ExtResource("4_w48qg")
+
+[node name="Base" type="Sprite2D" parent="Camera2D/ClockDisplay" unique_id=59392849]
+texture = ExtResource("4_efxa6")
+
+[node name="Topper" type="Sprite2D" parent="Camera2D/ClockDisplay" unique_id=1896513084]
+z_index = 2
+texture = ExtResource("5_ycdy4")
+
+[node name="Hand" type="Sprite2D" parent="Camera2D/ClockDisplay" unique_id=1550380786]
+z_index = 1
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_w48qg")
+offset = Vector2(0, -5.5)
+
+[node name="Text" type="RichTextLabel" parent="Camera2D/ClockDisplay" unique_id=746941113]
+z_index = 85
+clip_contents = false
+offset_left = -1.3232231e-05
+offset_top = 10.799993
+offset_right = 147.19998
+offset_bottom = 58.799984
+rotation = -0.1853207
+scale = Vector2(0.22758235, 0.22758235)
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(0.99607843, 0.7529412, 0.14509805, 1)
+theme_override_colors/font_outline_color = Color(0.5176471, 0.3764706, 0.05882353, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("2_0xm2m")
+theme_override_font_sizes/normal_font_size = 24
+scroll_active = false
+autowrap_mode = 0
+
+[node name="DublingPipe" type="Area2D" parent="Camera2D" unique_id=350454288]
+position = Vector2(286.00003, -90)
+scale = Vector2(2.5, 2.5)
+script = ExtResource("8_vivmo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/DublingPipe" unique_id=1253063211]
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_fmqpt")
+
+[node name="Front" type="Sprite2D" parent="Camera2D/DublingPipe" unique_id=1257622665]
+z_index = 2
+texture = ExtResource("9_2cqfq")
+
+[node name="Back" type="Sprite2D" parent="Camera2D/DublingPipe" unique_id=528042898]
+z_index = -7
+z_as_relative = false
+texture = ExtResource("10_yaehf")
+
+[node name="Popup" type="Sprite2D" parent="Camera2D/DublingPipe" unique_id=1675618858]
+z_index = -7
+z_as_relative = false
+position = Vector2(3.9999878, 0.40000057)
+rotation = -1.5707964
+texture = ExtResource("11_2cqfq")
+offset = Vector2(-12, 15)
+
+[node name="Text" type="RichTextLabel" parent="Camera2D/DublingPipe/Popup" unique_id=863233578]
+z_index = 85
+clip_contents = false
+offset_left = -28.4
+offset_top = 17.199999
+offset_right = 118.799995
+offset_bottom = 65.19999
+scale = Vector2(0.22758235, 0.22758235)
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(0.99607843, 0.7529412, 0.14509805, 1)
+theme_override_colors/font_outline_color = Color(0.32941177, 0.23529412, 0.03137255, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("2_0xm2m")
+theme_override_font_sizes/normal_font_size = 24
+text = "X11"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shweckle" type="Sprite2D" parent="Camera2D/DublingPipe/Popup" unique_id=1174755770]
+z_index = 90
+position = Vector2(2.4, 28)
+rotation = -0.1437641
+scale = Vector2(0.70927536, 0.70927536)
+texture = ExtResource("4_lquwl")
+
+[node name="SpawnPoint" type="Marker2D" parent="Camera2D/DublingPipe" unique_id=2048458794]
+position = Vector2(3.1999876, 2.7999997)
 
 [node name="BG" type="ColorRect" parent="." unique_id=1063822170]
 z_index = -11
@@ -76,6 +203,7 @@ scale = Vector2(2.5, 2.5)
 texture = ExtResource("4_lquwl")
 
 [node name="ShweckleManager" type="Node2D" parent="." unique_id=726594760]
+z_index = -9
 script = ExtResource("5_7mycd")
 
 [node name="SpawnTimer" type="Timer" parent="ShweckleManager" unique_id=1276951277]
@@ -85,26 +213,11 @@ autostart = true
 script = ExtResource("7_272bh")
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1415762330]
-position = Vector2(0, 196)
+position = Vector2(0, 195.5)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=753863134]
 shape = SubResource("RectangleShape2D_sclpf")
 
-[node name="Dubling" type="CharacterBody2D" parent="." unique_id=455646070]
-position = Vector2(114.00001, -5.9999847)
-scale = Vector2(2.5, 2.5)
-input_pickable = true
-script = ExtResource("8_kek77")
-
-[node name="Collider" type="CollisionShape2D" parent="Dubling" unique_id=1324162453]
-shape = SubResource("RectangleShape2D_lfl3o")
-
-[node name="Sprite" type="Sprite2D" parent="Dubling" unique_id=64397479]
-texture = ExtResource("8_5vw27")
-
-[node name="TickTimer" type="Timer" parent="Dubling" unique_id=644618934]
-autostart = true
-
-[connection signal="input_event" from="Dubling" to="Dubling" method="_on_input_event"]
-[connection signal="mouse_entered" from="Dubling" to="Dubois" method="_on_dubling_mouse_entered"]
-[connection signal="mouse_entered" from="Dubling" to="Dubling" method="_on_mouse_entered"]
+[connection signal="mouse_entered" from="Camera2D/DublingPipe" to="Camera2D/DublingPipe" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Camera2D/DublingPipe" to="Camera2D/DublingPipe" method="_on_mouse_exited"]
