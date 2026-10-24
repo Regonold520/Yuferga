@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ddsddru6n3j7g"]
+
+[ext_resource type="FontFile" uid="uid://dbte4566h4ald" path="res://Daydream DEMO.otf" id="1_64jip"]
+[ext_resource type="Script" uid="uid://u88o2tn0k2mk" path="res://popup_text.gd" id="2_6w6kj"]
+
+[node name="PopupText" type="RichTextLabel" unique_id=1539429592]
+z_index = 85
+clip_contents = false
+offset_left = -192.0
+offset_top = -20.0
+offset_right = 194.0
+offset_bottom = 22.0
+scale = Vector2(0.42895538, 0.42895538)
+pivot_offset = Vector2(191.86, 20.355)
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.5686275, 0.10980392, 0.20392157, 1)
+theme_override_colors/font_outline_color = Color(0.29, 0.026099991, 0.0700834, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/normal_font = ExtResource("1_64jip")
+theme_override_font_sizes/normal_font_size = 27
+text = "FREEZE"
+scroll_active = false
+horizontal_alignment = 1
+script = ExtResource("2_6w6kj")

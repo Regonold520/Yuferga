@@ -20,6 +20,9 @@ var maxEnergy : float = 100.0
 var isHovering = false
 var start = true
 
+var ascending = false
+var ascendingVel = -20.0
+
 var beforeRest : moveTypes
 
 signal recharged
@@ -34,11 +37,16 @@ func _ready() -> void:
 	targetX = newX
 
 func recharge():
-	if currentMove == moveTypes.Rest:
+	if currentMove == moveTypes.Rest and !Ref.judgement:
 		recharged.emit()
 		rechargeTimer.stop()
 		changeState(beforeRest)
 		energy = maxEnergy
+
+func ascend():
+	ascending = true
+	
+	
 
 func beLazy(manualRecover = true):
 	beforeRest = currentMove
@@ -61,7 +69,10 @@ func tick():
 		var newX = randf_range(-300, 200)
 		targetX = newX
 
+@onready var rpv = randi()
+var ascendDelta = 0.0
 func _physics_process(delta: float) -> void:
+	
 	isHovering = Ref.dublingManager.currentHover == self
 	
 	sprite.offset.y = -sprite.texture.get_height()/2
@@ -71,6 +82,15 @@ func _physics_process(delta: float) -> void:
 	
 	if currentMove == moveTypes.FreeMove:
 		energy -= delta*5
+	
+	if ascending:
+		ascendDelta += (delta*5)
+		ascendingVel -= (delta*70)
+		rotation_degrees = ascendDelta * (cos(rpv)*2) * 10
+		velocity.y = ascendingVel
+		
+		if global_position.y <= -335.0:
+			queue_free()
 	
 	if isHovering:
 		if Input.is_action_just_released("Click"):
@@ -91,7 +111,7 @@ func _physics_process(delta: float) -> void:
 		beLazy()
 		
 	
-	if not is_on_floor():
+	if not is_on_floor() and !ascending:
 		velocity += get_gravity() * delta
 	
 	var closest = null

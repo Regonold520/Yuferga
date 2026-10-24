@@ -9,6 +9,18 @@ var shweckleData : Dictionary
 @onready var clockDisplay : ClockDisplay = get_viewport().get_camera_2d().find_child("ClockDisplay")
 @onready var dublingPipe : DublingPipe = get_viewport().get_camera_2d().find_child("DublingPipe")
 
+@onready var dubois : Dubois = get_tree().current_scene.find_child("Dubois")
+
+@onready var popupTextScene : PackedScene = load("res://popup_text.tscn")
+
+var judgement = false
+
+func showPopup(text : String, baseColour : Color, outlineColour : Color):
+	var newPopup : PopupText = popupTextScene.instantiate()
+	get_viewport().get_camera_2d().add_child(newPopup)
+	
+	newPopup.present(text, baseColour, outlineColour)
+
 var shweckleCount : int = 2:
 	set(count):
 		shweckleCount = count

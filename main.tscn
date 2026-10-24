@@ -78,20 +78,23 @@ offset = Vector2(0, -5.5)
 [node name="Text" type="RichTextLabel" parent="Camera2D/ClockDisplay" unique_id=746941113]
 z_index = 85
 clip_contents = false
-offset_left = -1.3232231e-05
-offset_top = 10.799993
-offset_right = 147.19998
-offset_bottom = 58.799984
-rotation = -0.1853207
-scale = Vector2(0.22758235, 0.22758235)
+offset_left = -142.4
+offset_top = -9.2
+offset_right = 160.34695
+offset_bottom = 38.79999
+rotation = -0.1850049
+scale = Vector2(0.228, 0.228)
+pivot_offset = Vector2(151.374, 24)
 size_flags_horizontal = 4
 theme_override_colors/default_color = Color(0.99607843, 0.7529412, 0.14509805, 1)
 theme_override_colors/font_outline_color = Color(0.5176471, 0.3764706, 0.05882353, 1)
 theme_override_constants/outline_size = 12
 theme_override_fonts/normal_font = ExtResource("2_0xm2m")
 theme_override_font_sizes/normal_font_size = 24
+text = "12121/1"
 scroll_active = false
 autowrap_mode = 0
+horizontal_alignment = 1
 
 [node name="DublingPipe" type="Area2D" parent="Camera2D" unique_id=350454288]
 position = Vector2(286.00003, -90)

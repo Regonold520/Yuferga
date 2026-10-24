@@ -31,8 +31,17 @@ func createShweckle(id, overwritePos = null):
 
 func spawnTimeout():
 	if raining:
-		
-		
 		var newS = createShweckle(Ref.shweckleData.keys().pick_random())
 		
-		
+@onready var moveTween = create_tween()
+func rainState(state):
+	var finalFall = 0.0
+	if state:
+		finalFall = 1.0
+	if moveTween:
+		moveTween.kill()
+	moveTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+	
+	moveTween.tween_property(self, "fallMult", finalFall, 1)
+	raining = state
+	

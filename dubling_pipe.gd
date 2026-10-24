@@ -14,7 +14,7 @@ func _ready() -> void:
 	nextCost = 3
 	
 func _process(delta: float) -> void:
-	if isHovering and Input.is_action_just_released("Click"):
+	if isHovering and Input.is_action_just_released("Click") and !Ref.judgement:
 		if Ref.shweckleCount - nextCost >= 0:
 			Ref.shweckleCount -= nextCost
 			nextCost += 1
@@ -22,11 +22,12 @@ func _process(delta: float) -> void:
 
 @onready var pipeTween = create_tween()
 func _on_mouse_entered() -> void:
-	isHovering = true
-	
-	pipeTween.kill()
-	pipeTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	pipeTween.tween_property(find_child("Popup"), "rotation_degrees", 0, 0.3)
+	if !Ref.judgement:
+		isHovering = true
+		
+		pipeTween.kill()
+		pipeTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+		pipeTween.tween_property(find_child("Popup"), "rotation_degrees", 0, 0.3)
 
 func _on_mouse_exited() -> void:
 	isHovering = false

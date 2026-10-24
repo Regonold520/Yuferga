@@ -8,9 +8,10 @@ var currentHover : Dubling = null
 var canChangeMovement = true
 
 func _ready() -> void:
-	for i in 0:
+	for i in 20:
 		await get_tree().create_timer(0.01).timeout
-		createDubling()
+		var d : Dubling = createDubling()
+		d.changeState(d.moveTypes.FreeMove)
 
 func hover(newDub):
 	if currentHover == null:
@@ -23,6 +24,21 @@ func unhover(newDub):
 		currentHover = null
 		return true
 	return false
+
+func take(count):
+	var fullCount = dublings.duplicate()
+	var collected = []
+	
+	for i in count:
+		var picked = fullCount.pick_random()
+		fullCount.erase(picked)
+		collected.append(picked)
+	
+	for i in collected:
+		i.ascend()
+		dublings.erase(i)
+		Ref.clockDisplay.setQuotaText()
+		await get_tree().create_timer(randf_range(0.02, 0.06)).timeout
 
 func createDubling():
 	var newDubling : Dubling = load("res://dubling.tscn").instantiate()
