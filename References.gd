@@ -4,6 +4,7 @@ var shweckleData : Dictionary
 
 @onready var shweckleManager : ShweckleManager = get_tree().current_scene.find_child("ShweckleManager")
 @onready var dublingManager : DublingManager = get_tree().current_scene.find_child("DublingManager")
+@onready var soundManager : SoundManager = get_tree().current_scene.find_child("SoundManager")
 
 @onready var shweckleDisplay : ShweckleDisplay = get_tree().current_scene.find_child("ShweckleDisplay")
 @onready var clockDisplay : ClockDisplay = get_tree().current_scene.find_child("ClockDisplay")
@@ -29,7 +30,7 @@ var shweckleCount : int = 2:
 		shweckleDisplay.txt.text = "X" + str(count)
 		shweckleDisplay.jiggle()
 
-var currentQuota = 0:
+var currentQuota = 1:
 	set(value):
 		currentQuota = value
 		clockDisplay.setQuotaText()

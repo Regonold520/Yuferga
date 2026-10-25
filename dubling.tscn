@@ -7,6 +7,7 @@
 size = Vector2(11, 19)
 
 [node name="Dubling" type="CharacterBody2D" unique_id=1144231856]
+process_mode = 3
 scale = Vector2(2.5, 2.5)
 collision_mask = 2
 input_pickable = true

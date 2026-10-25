@@ -12,6 +12,7 @@ func _ready() -> void:
 	Ref.mainMenu.menuOpened.connect(mainMenuOpened)
 	
 func mainMenuClosed():
+	return
 	for i in 20:
 		await get_tree().create_timer(0.01).timeout
 		var d : Dubling = createDubling()

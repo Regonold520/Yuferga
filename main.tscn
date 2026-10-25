@@ -18,12 +18,21 @@
 [ext_resource type="Texture2D" uid="uid://cv2e3ki5kug40" path="res://sprites/pipe_popup.png" id="11_2cqfq"]
 [ext_resource type="Script" uid="uid://vpx4qq47s4dd" path="res://main_menu.gd" id="17_yaehf"]
 [ext_resource type="Texture2D" uid="uid://bmravvtxiwy6v" path="res://sprites/logo.png" id="18_074og"]
+[ext_resource type="Script" uid="uid://d3itj3v5xox2w" path="res://game_logo.gd" id="19_cegan"]
+[ext_resource type="Script" uid="uid://gq7aleand8l1" path="res://menu_dublings.gd" id="20_82xsv"]
+[ext_resource type="Texture2D" uid="uid://dmootnoynnh0t" path="res://sprites/menuButton.png" id="21_getpj"]
+[ext_resource type="Script" uid="uid://c7aslwlpbrd0" path="res://menu_button.gd" id="22_ryguw"]
+[ext_resource type="Script" uid="uid://cphbge3e4o1fp" path="res://sound_manager.gd" id="23_1u8w0"]
+[ext_resource type="AudioStream" uid="uid://bvtkrtweuy2cj" path="res://audio/Shweckle Sity.mp3" id="24_0odxb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmqpt"]
 size = Vector2(32.800034, 22.400002)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sclpf"]
 size = Vector2(640, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sclpf"]
+texture = ExtResource("21_getpj")
 
 [node name="Main" type="Node2D" unique_id=2100775180]
 process_mode = 1
@@ -119,7 +128,6 @@ theme_override_colors/font_outline_color = Color(0.5176471, 0.3764706, 0.0588235
 theme_override_constants/outline_size = 12
 theme_override_fonts/normal_font = ExtResource("2_0xm2m")
 theme_override_font_sizes/normal_font_size = 24
-text = "12121/1"
 scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
@@ -190,7 +198,7 @@ clip_contents = false
 offset_left = -194.40001
 offset_top = -83.6
 offset_right = 111.2
-offset_bottom = 55.599983
+offset_bottom = 91.60001
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(152.8, 69.6)
 size_flags_horizontal = 4
@@ -215,6 +223,7 @@ script = ExtResource("7_272bh")
 [node name="Floor" type="StaticBody2D" parent="." unique_id=1415762330]
 position = Vector2(0, 195.5)
 collision_layer = 3
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=753863134]
 shape = SubResource("RectangleShape2D_sclpf")
@@ -222,13 +231,72 @@ shape = SubResource("RectangleShape2D_sclpf")
 [node name="MainMenu" type="Node2D" parent="." unique_id=2025215659]
 process_mode = 3
 process_priority = 175
+physics_interpolation_mode = 1
 script = ExtResource("17_yaehf")
 
-[node name="Sprite2D" type="Sprite2D" parent="MainMenu" unique_id=970119325]
-visible = false
+[node name="GameLogo" type="Sprite2D" parent="MainMenu" unique_id=970119325]
 position = Vector2(0, -82)
 scale = Vector2(2, 2)
 texture = ExtResource("18_074og")
+script = ExtResource("19_cegan")
+
+[node name="MenuDublings" type="Node2D" parent="MainMenu" unique_id=1769747164]
+process_mode = 3
+script = ExtResource("20_82xsv")
+
+[node name="Floor" type="StaticBody2D" parent="MainMenu/MenuDublings" unique_id=1819436469]
+position = Vector2(0, 195.5)
+collision_layer = 12
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MainMenu/MenuDublings/Floor" unique_id=1506290771]
+shape = SubResource("RectangleShape2D_sclpf")
+
+[node name="MenuButton" type="Button" parent="MainMenu" unique_id=590242900]
+offset_left = -20.0
+offset_top = 10.0
+offset_right = 17.333336
+offset_bottom = 31.0
+scale = Vector2(2, 2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/normal = SubResource("StyleBoxTexture_sclpf")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_sclpf")
+theme_override_styles/hover = SubResource("StyleBoxTexture_sclpf")
+theme_override_styles/focus = SubResource("StyleBoxTexture_sclpf")
+script = ExtResource("22_ryguw")
+
+[node name="Text" type="RichTextLabel" parent="MainMenu/MenuButton" unique_id=1364383355]
+z_index = 85
+clip_contents = false
+layout_mode = 0
+offset_left = -114.33333
+offset_top = -50.0
+offset_right = 43.66667
+offset_bottom = 14.0
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(152.8, 69.6)
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.9493212, 0.88919497, 0.82371956, 1)
+theme_override_colors/font_outline_color = Color(0.4835493, 0.414157, 0.3444828, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/normal_font = ExtResource("2_0xm2m")
+theme_override_font_sizes/normal_font_size = 20
+text = "Start"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoundManager" type="Node2D" parent="." unique_id=983530391]
+script = ExtResource("23_1u8w0")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="SoundManager" unique_id=747497208]
+stream = ExtResource("24_0odxb")
+volume_db = -20.515
+autoplay = true
 
 [connection signal="mouse_entered" from="DublingPipe" to="DublingPipe" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="DublingPipe" to="DublingPipe" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MainMenu/MenuButton" to="MainMenu/MenuButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MainMenu/MenuButton" to="MainMenu/MenuButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="MainMenu/MenuButton" to="MainMenu/MenuButton" method="_on_pressed"]

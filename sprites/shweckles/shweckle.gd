@@ -39,6 +39,10 @@ var disabled = false
 func _on_body_entered(body: Node2D) -> void:
 	if body is Dubling:
 		if body.currentMove != body.moveTypes.Rest and !disabled:
+			var audio = ["nom1", "nom2", "nom3"].pick_random()
+			Ref.soundManager.playAudio("res://audio/"+audio+".mp3", -1, true)
+			
+			
 			disabled = true
 			print("yolo", self)
 			Ref.shweckleCount += value

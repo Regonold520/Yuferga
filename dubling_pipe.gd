@@ -3,6 +3,8 @@ class_name DublingPipe
 
 @onready var spawnPoint : Marker2D = find_child("SpawnPoint")
 
+var canBuy = true
+
 var isHovering = false
 
 var activePos = Vector2(286.0, -90.0)
@@ -17,7 +19,7 @@ func _ready() -> void:
 	nextCost = 3
 	
 func _process(delta: float) -> void:
-	if isHovering and Input.is_action_just_released("Click") and !Ref.judgement:
+	if isHovering and Input.is_action_just_released("Click") and !Ref.judgement and canBuy:
 		if Ref.shweckleCount - nextCost >= 0:
 			Ref.shweckleCount -= nextCost
 			nextCost += 1

@@ -23,11 +23,14 @@ var start = true
 var ascending = false
 var ascendingVel = -20.0
 
+var getTired = true
+
 var beforeRest : moveTypes
 
 signal recharged
 
 func _ready() -> void:
+	tickTimer.wait_time = randf_range(0.5,1.8)
 	energy = maxEnergy
 	tickTimer.timeout.connect(tick)
 	rechargeTimer.timeout.connect(recharge)
@@ -80,7 +83,7 @@ func _physics_process(delta: float) -> void:
 	if start and is_on_floor():
 		start = false
 	
-	if currentMove == moveTypes.FreeMove:
+	if currentMove == moveTypes.FreeMove and getTired:
 		energy -= delta*5
 	
 	if ascending:
@@ -100,7 +103,7 @@ func _physics_process(delta: float) -> void:
 				elif currentMove == moveTypes.FreeMove:
 					changeState(moveTypes.Idle)
 			else:
-				if Ref.shweckleCount > 2:
+				if Ref.shweckleCount > 2 and Ref.dublingManager.canChangeMovement:
 					Ref.shweckleCount -= 3
 					recharge()
 		sprite.scale = Vector2(1.2,1.2)
@@ -130,13 +133,13 @@ func _physics_process(delta: float) -> void:
 			if targetX and currentMove == moveTypes.FreeMove:
 				var pos = Vector2(targetX, 156.0)
 				velocity.x = (global_position.direction_to(pos) * (min(speed * delta,global_position.distance_to(pos)) / delta)).x
-				if global_position.distance_to(pos) < 5:
+				if global_position.distance_to(pos) < 25:
 					targetX = null
 					
 					velocity.x = 0
 			else:
 				velocity.x = 0
-		
+	
 	move_and_slide()
 
 func _on_mouse_entered() -> void:

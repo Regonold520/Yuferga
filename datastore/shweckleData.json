@@ -10,5 +10,33 @@
 	"hat": {
 		"value": 1,
 		"fallSpeed": 6
+	},
+	"hybrid": {
+		"value": 3,
+		"fallSpeed": 2
+	},
+	"mellon": {
+		"value": 2,
+		"fallSpeed": 2
+	},
+	"night": {
+		"value": 5,
+		"fallSpeed": 4
+	},
+	"orange": {
+		"value": 2,
+		"fallSpeed": 3
+	},
+	"pink": {
+		"value": 4,
+		"fallSpeed": 3
+	},
+	"starry": {
+		"value": 10,
+		"fallSpeed": 5
+	},
+	"turret": {
+		"value": 7,
+		"fallSpeed": 6
 	}
 }

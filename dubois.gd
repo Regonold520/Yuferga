@@ -14,59 +14,61 @@ func _ready() -> void:
 	Ref.mainMenu.menuOpened.connect(mainMenuOpened)
 
 func mainMenuClosed():
-	#Ref.dublingManager.canChangeMovement = false
-	#
-	#await speakWords("Hello! Its me Dubois! The great and mighty")
-	#await speakWords("I have brought you here for ONE specific purpose mortal")
-	#
-	#await speakWords("To procure me an ARMY of dublings!")
-	#await speakWords("And you have to do my bidding because i CONTROL this realm, ya hear")
-	#
-	#await speakWords("You may be wondering, whats a dubling? Well")
-	#
+	Ref.dublingPipe.canBuy = false
+	Ref.dublingManager.canChangeMovement = false
+	
+	await speakWords("Hello! Its me Dubois! The great and mighty")
+	await speakWords("I have brought you here for ONE specific purpose mortal")
+	
+	await speakWords("To procure me an ARMY of dublings!")
+	await speakWords("And you have to do my bidding because i CONTROL this realm, and yknow")
+	await speakWords("You're just a little guy compared to ME!")
+	
+	await speakWords("You may be wondering, whats a dubling? Well")
+	
 	var tutDub : Dubling = Ref.dublingManager.createDubling()
-	#
-	#await speakWords("THIS is a spectacular dubling")
-	#
-	#await speakWords("They come from that really cool pipe I made! but theyre not free")
-	#await speakWords("Ya gotta spend your shweckles to make one.")
-	#await speakWords("Whats a shweckle?")
-	#
-	#Ref.shweckleManager.createShweckle("blue", Vector2(tutDub.global_position.x,  -195.0))
-	#
-	#await speakWords("Damn you really ARE new here, they tend to rain from the sky every now and then")
-	#
-	#await speakWords("Dublings LOVE shweckles and will happily collect them for you.")
-	#await speakWords("Now, about the dublings, they tend to get quite lazy just give em 3 shweckles")
-	#
-	#tutDub.beLazy(false)
-	#await tutDub.recharged
-	#
-	#await speakWords("As well as being currency, shweckles are quite tasty!")
-	#await speakWords("Dublings are simple creatures and have 2 different controllable states.")
-	#
-	#tutDub.changeState(tutDub.moveTypes.FreeMove)
-	#await speakWords("Red hat for freely moving, they lose energy in this state")
-	#
-	#tutDub.changeState(tutDub.moveTypes.Idle)
-	#await speakWords("Blue hat for no movement")
-	#
-	#Ref.dublingManager.canChangeMovement = true
-	#
-	#await speakWords("And you can click on em to cycle between these")
-	#
-	#await speakWords("Anyways down to business.")
-	#await speakWords("You're not off the hook")
-	#await speakWords("See that clock up there?")
-	#await speakWords("Upon striking the top i shall return")
-	#await speakWords("I will demand a certain number of dublings to be sacraficed")
-	#await speakWords("I hope you'll do the right thing.")
+	
+	await speakWords("THIS is a spectacular dubling")
+	
+	await speakWords("They come from that really cool pipe I made! but theyre not free")
+	await speakWords("Ya gotta spend your shweckles to make one. just click on that pipe up there")
+	await speakWords("Whats a shweckle?")
+	
+	Ref.shweckleManager.createShweckle("blue", Vector2(tutDub.global_position.x,  -195.0))
+	
+	await speakWords("Damn you really ARE new here, they tend to rain from the sky every now and then")
+	
+	await speakWords("Dublings LOVE shweckles and will happily collect them for you.")
+	await speakWords("Now, about the dublings, they tend to get quite lazy they can either wake up themselves or just give em 3 shweckles")
+	Ref.dublingManager.canChangeMovement = true
+	tutDub.beLazy(false)
+	await tutDub.recharged
+	Ref.dublingManager.canChangeMovement = false
+	await speakWords("As well as being currency, shweckles are quite tasty!")
+	await speakWords("Dublings are simple creatures and have 2 different controllable states.")
+	
+	tutDub.changeState(tutDub.moveTypes.FreeMove)
+	await speakWords("Red hat for freely moving, they lose energy in this state")
+	
+	tutDub.changeState(tutDub.moveTypes.Idle)
+	await speakWords("Blue hat for no movement, they can still collect shweckles though")
+	
+	Ref.dublingManager.canChangeMovement = true
+	
+	await speakWords("And you can click on em to cycle between these")
+	
+	await speakWords("Anyways down to business.")
+	await speakWords("You're not off the hook")
+	await speakWords("See that clock up there?")
+	await speakWords("Upon striking the top i shall return")
+	await speakWords("I will demand a certain number of dublings to be sacraficed")
+	await speakWords("I hope you'll do the right thing.")
 
 	Ref.shweckleManager.rainState(true)
 	for i : Dubling in Ref.dublingManager.dublings:
 		i.recharge()
-	
-	await demandQuota(100)
+	Ref.dublingPipe.canBuy = true
+	await demandQuota(1)
 	leave()
 	
 func mainMenuOpened():
@@ -103,6 +105,8 @@ func comeBack():
 	
 
 	Ref.showPopup("FREEZE", Color("4fd2f6"), Color("3674b3"))
+	
+	Ref.soundManager.playAudio("res://audio/record.mp3", -10)
 
 	await moveTween.finished
 	
@@ -122,12 +126,12 @@ func evaluate():
 		Ref.dublingManager.take(Ref.currentQuota)
 		
 		await speakWords("Pleasure doing business with you")
-		demandQuota(Ref.currentQuota + 1)
+		demandQuota(Ref.currentQuota + 2)
 		
 	else:
 		Ref.showPopup("FAILED", Color("911c34"), Color("4a0712"))
-		Ref.clockDisplay.returnText()
 		await speakWords("Uh oh.. You didnt fulfill my demand")
+		Ref.clockDisplay.returnText()
 		await speakWords("Im so sorry, this is kinda sad")
 		await speakWords("I liked you i think")
 		await speakWords("Oh well!")
@@ -148,7 +152,8 @@ func speakWords(text):
 		txt.visible_characters += 1
 		txtTween.kill()
 		txtTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
-		
+		var audio = ["dubois1", "dubois2", "dubois3"].pick_random()
+		Ref.soundManager.playAudio("res://audio/"+audio+".mp3", randf_range(-2,0), true)
 		
 		var adder = 0
 		if i in [".", ",", "?", "!"]: adder += 0.4
@@ -168,5 +173,6 @@ func demandQuota(count):
 	Ref.currentQuota = count
 	await speakWords("I demand you procure me " + str(Ref.currentQuota) + " Dublings")
 	
-	Ref.clockDisplay.tickClock(5)
+	Ref.clockDisplay.tickClock(60)
 	leave()
+	Ref.dublingManager.canChangeMovement = true
