@@ -5,6 +5,9 @@ class_name DublingPipe
 
 var isHovering = false
 
+var activePos = Vector2(286.0, -90.0)
+var menuPos = Vector2(400.0, -90.0)
+
 var nextCost = 0:
 	set(value):
 		nextCost = value

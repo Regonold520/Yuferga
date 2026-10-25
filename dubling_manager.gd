@@ -8,10 +8,21 @@ var currentHover : Dubling = null
 var canChangeMovement = true
 
 func _ready() -> void:
+	Ref.mainMenu.menuClosed.connect(mainMenuClosed)
+	Ref.mainMenu.menuOpened.connect(mainMenuOpened)
+	
+func mainMenuClosed():
 	for i in 20:
 		await get_tree().create_timer(0.01).timeout
 		var d : Dubling = createDubling()
 		d.changeState(d.moveTypes.FreeMove)
+
+func mainMenuOpened():
+	var endTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC).set_parallel()
+	for i in dublings.duplicate():
+		endTween.tween_property(i, "position:y", 220.0, 0.5)
+		endTween.tween_property(i, "modulate", Color(1,1,1,0), 0.5)
+		dublings.erase(i)
 
 func hover(newDub):
 	if currentHover == null:

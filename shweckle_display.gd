@@ -4,6 +4,9 @@ class_name ShweckleDisplay
 @onready var img : Sprite2D = find_child("Shweckle")
 @onready var txt : RichTextLabel = find_child("Text")
 
+var activePos = Vector2(267.0, -154.0)
+var menuPos = Vector2(267.0, -239.0)
+
 var deltaTimer : float = 0.0
 func _process(delta: float) -> void:
 	deltaTimer += delta

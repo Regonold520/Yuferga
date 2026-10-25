@@ -14,6 +14,9 @@ var textCenterPos = Vector2(-44.4, -5.2)
 var textCenterRot = 0.0
 var textCenterScale = Vector2(0.368,0.368)
 
+var activePos = Vector2(-267.0, -131.0)
+var menuPos = Vector2(-400.0, -131.0)
+
 func setQuotaText():
 	var newStr = str(Ref.dublingManager.dublings.size()) + "/" + str(Ref.currentQuota)
 	

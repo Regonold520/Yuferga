@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://dgf3bsrvve5kp" path="res://sprites/pipe_front.png" id="9_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://yr3fs7njvvh3" path="res://sprites/pipe_back.png" id="10_yaehf"]
 [ext_resource type="Texture2D" uid="uid://cv2e3ki5kug40" path="res://sprites/pipe_popup.png" id="11_2cqfq"]
+[ext_resource type="Script" uid="uid://vpx4qq47s4dd" path="res://main_menu.gd" id="17_yaehf"]
+[ext_resource type="Texture2D" uid="uid://bmravvtxiwy6v" path="res://sprites/logo.png" id="18_074og"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmqpt"]
 size = Vector2(32.800034, 22.400002)
@@ -24,58 +26,84 @@ size = Vector2(32.800034, 22.400002)
 size = Vector2(640, 32)
 
 [node name="Main" type="Node2D" unique_id=2100775180]
+process_mode = 1
 metadata/_edit_horizontal_guides_ = [-196.0]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=459705573]
-z_index = 28
-zoom = Vector2(1.8, 1.8)
-
-[node name="ShweckleDisplay" type="Node2D" parent="Camera2D" unique_id=1369439118]
-position = Vector2(267.00003, -154)
+[node name="DublingPipe" type="Area2D" parent="." unique_id=350454288]
+position = Vector2(286.00003, -90)
 scale = Vector2(2.5, 2.5)
-script = ExtResource("1_4c57u")
+script = ExtResource("8_vivmo")
 
-[node name="Shweckle" type="Sprite2D" parent="Camera2D/ShweckleDisplay" unique_id=223480909]
-texture = ExtResource("4_lquwl")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DublingPipe" unique_id=1253063211]
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_fmqpt")
 
-[node name="Text" type="RichTextLabel" parent="Camera2D/ShweckleDisplay" unique_id=421129065]
+[node name="Front" type="Sprite2D" parent="DublingPipe" unique_id=1257622665]
+z_index = 2
+texture = ExtResource("9_2cqfq")
+
+[node name="Back" type="Sprite2D" parent="DublingPipe" unique_id=528042898]
+z_index = -7
+z_as_relative = false
+texture = ExtResource("10_yaehf")
+
+[node name="Popup" type="Sprite2D" parent="DublingPipe" unique_id=1675618858]
+z_index = -7
+z_as_relative = false
+position = Vector2(3.9999878, 0.40000057)
+rotation = -1.5707964
+texture = ExtResource("11_2cqfq")
+offset = Vector2(-12, 15)
+
+[node name="Text" type="RichTextLabel" parent="DublingPipe/Popup" unique_id=863233578]
 z_index = 85
 clip_contents = false
-offset_left = -15.200001
-offset_top = 1.5999938
-offset_right = 132.0
-offset_bottom = 49.599987
+offset_left = -28.4
+offset_top = 17.199999
+offset_right = 118.799995
+offset_bottom = 65.19999
 scale = Vector2(0.22758235, 0.22758235)
 size_flags_horizontal = 4
-theme_override_colors/default_color = Color(0.92941177, 0.84705883, 0.75686276, 1)
-theme_override_colors/font_outline_color = Color(0.55437607, 0.47919947, 0.40385404, 1)
+theme_override_colors/default_color = Color(0.99607843, 0.7529412, 0.14509805, 1)
+theme_override_colors/font_outline_color = Color(0.32941177, 0.23529412, 0.03137255, 1)
 theme_override_constants/outline_size = 12
 theme_override_fonts/normal_font = ExtResource("2_0xm2m")
 theme_override_font_sizes/normal_font_size = 24
-text = "X2"
+text = "X11"
 scroll_active = false
 autowrap_mode = 0
-horizontal_alignment = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ClockDisplay" type="Node2D" parent="Camera2D" unique_id=1839610101]
-position = Vector2(-266.99997, -130.99998)
-scale = Vector2(2.5, 2.5)
+[node name="Shweckle" type="Sprite2D" parent="DublingPipe/Popup" unique_id=1174755770]
+z_index = 90
+position = Vector2(2.4, 28)
+rotation = -0.1437641
+scale = Vector2(0.70927536, 0.70927536)
+texture = ExtResource("4_lquwl")
+
+[node name="SpawnPoint" type="Marker2D" parent="DublingPipe" unique_id=2048458794]
+position = Vector2(3.1999876, 2.7999997)
+
+[node name="ClockDisplay" type="Node2D" parent="." unique_id=1839610101]
+position = Vector2(-266.9999, -130.99998)
+scale = Vector2(2.4999998, 2.4999998)
 script = ExtResource("4_w48qg")
 
-[node name="Base" type="Sprite2D" parent="Camera2D/ClockDisplay" unique_id=59392849]
+[node name="Base" type="Sprite2D" parent="ClockDisplay" unique_id=59392849]
 texture = ExtResource("4_efxa6")
 
-[node name="Topper" type="Sprite2D" parent="Camera2D/ClockDisplay" unique_id=1896513084]
+[node name="Topper" type="Sprite2D" parent="ClockDisplay" unique_id=1896513084]
 z_index = 2
 texture = ExtResource("5_ycdy4")
 
-[node name="Hand" type="Sprite2D" parent="Camera2D/ClockDisplay" unique_id=1550380786]
+[node name="Hand" type="Sprite2D" parent="ClockDisplay" unique_id=1550380786]
 z_index = 1
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("6_w48qg")
 offset = Vector2(0, -5.5)
 
-[node name="Text" type="RichTextLabel" parent="Camera2D/ClockDisplay" unique_id=746941113]
+[node name="Text" type="RichTextLabel" parent="ClockDisplay" unique_id=746941113]
 z_index = 85
 clip_contents = false
 offset_left = -142.4
@@ -96,61 +124,36 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="DublingPipe" type="Area2D" parent="Camera2D" unique_id=350454288]
-position = Vector2(286.00003, -90)
+[node name="ShweckleDisplay" type="Node2D" parent="." unique_id=1369439118]
+position = Vector2(267.00003, -154)
 scale = Vector2(2.5, 2.5)
-script = ExtResource("8_vivmo")
+script = ExtResource("1_4c57u")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/DublingPipe" unique_id=1253063211]
-scale = Vector2(0.99999976, 0.99999976)
-shape = SubResource("RectangleShape2D_fmqpt")
+[node name="Shweckle" type="Sprite2D" parent="ShweckleDisplay" unique_id=223480909]
+texture = ExtResource("4_lquwl")
 
-[node name="Front" type="Sprite2D" parent="Camera2D/DublingPipe" unique_id=1257622665]
-z_index = 2
-texture = ExtResource("9_2cqfq")
-
-[node name="Back" type="Sprite2D" parent="Camera2D/DublingPipe" unique_id=528042898]
-z_index = -7
-z_as_relative = false
-texture = ExtResource("10_yaehf")
-
-[node name="Popup" type="Sprite2D" parent="Camera2D/DublingPipe" unique_id=1675618858]
-z_index = -7
-z_as_relative = false
-position = Vector2(3.9999878, 0.40000057)
-rotation = -1.5707964
-texture = ExtResource("11_2cqfq")
-offset = Vector2(-12, 15)
-
-[node name="Text" type="RichTextLabel" parent="Camera2D/DublingPipe/Popup" unique_id=863233578]
+[node name="Text" type="RichTextLabel" parent="ShweckleDisplay" unique_id=421129065]
 z_index = 85
 clip_contents = false
-offset_left = -28.4
-offset_top = 17.199999
-offset_right = 118.799995
-offset_bottom = 65.19999
+offset_left = -15.200001
+offset_top = 1.5999938
+offset_right = 132.0
+offset_bottom = 49.599987
 scale = Vector2(0.22758235, 0.22758235)
 size_flags_horizontal = 4
-theme_override_colors/default_color = Color(0.99607843, 0.7529412, 0.14509805, 1)
-theme_override_colors/font_outline_color = Color(0.32941177, 0.23529412, 0.03137255, 1)
+theme_override_colors/default_color = Color(0.92941177, 0.84705883, 0.75686276, 1)
+theme_override_colors/font_outline_color = Color(0.55437607, 0.47919947, 0.40385404, 1)
 theme_override_constants/outline_size = 12
 theme_override_fonts/normal_font = ExtResource("2_0xm2m")
 theme_override_font_sizes/normal_font_size = 24
-text = "X11"
+text = "X2"
 scroll_active = false
 autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
+horizontal_alignment = 2
 
-[node name="Shweckle" type="Sprite2D" parent="Camera2D/DublingPipe/Popup" unique_id=1174755770]
-z_index = 90
-position = Vector2(2.4, 28)
-rotation = -0.1437641
-scale = Vector2(0.70927536, 0.70927536)
-texture = ExtResource("4_lquwl")
-
-[node name="SpawnPoint" type="Marker2D" parent="Camera2D/DublingPipe" unique_id=2048458794]
-position = Vector2(3.1999876, 2.7999997)
+[node name="Camera2D" type="Camera2D" parent="." unique_id=459705573]
+z_index = 28
+zoom = Vector2(1.8, 1.8)
 
 [node name="BG" type="ColorRect" parent="." unique_id=1063822170]
 z_index = -11
@@ -196,14 +199,8 @@ theme_override_colors/font_outline_color = Color(0.5176471, 0.3764706, 0.0588235
 theme_override_constants/outline_size = 12
 theme_override_fonts/normal_font = ExtResource("2_0xm2m")
 theme_override_font_sizes/normal_font_size = 16
-text = "Hello its me Dubois here to save the day!"
 scroll_active = false
 horizontal_alignment = 1
-
-[node name="BlueShweckle" type="Sprite2D" parent="." unique_id=1903219480]
-position = Vector2(-299, 200)
-scale = Vector2(2.5, 2.5)
-texture = ExtResource("4_lquwl")
 
 [node name="ShweckleManager" type="Node2D" parent="." unique_id=726594760]
 z_index = -9
@@ -222,5 +219,16 @@ collision_layer = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=753863134]
 shape = SubResource("RectangleShape2D_sclpf")
 
-[connection signal="mouse_entered" from="Camera2D/DublingPipe" to="Camera2D/DublingPipe" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Camera2D/DublingPipe" to="Camera2D/DublingPipe" method="_on_mouse_exited"]
+[node name="MainMenu" type="Node2D" parent="." unique_id=2025215659]
+process_mode = 3
+process_priority = 175
+script = ExtResource("17_yaehf")
+
+[node name="Sprite2D" type="Sprite2D" parent="MainMenu" unique_id=970119325]
+visible = false
+position = Vector2(0, -82)
+scale = Vector2(2, 2)
+texture = ExtResource("18_074og")
+
+[connection signal="mouse_entered" from="DublingPipe" to="DublingPipe" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="DublingPipe" to="DublingPipe" method="_on_mouse_exited"]

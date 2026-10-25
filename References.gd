@@ -5,9 +5,11 @@ var shweckleData : Dictionary
 @onready var shweckleManager : ShweckleManager = get_tree().current_scene.find_child("ShweckleManager")
 @onready var dublingManager : DublingManager = get_tree().current_scene.find_child("DublingManager")
 
-@onready var shweckleDisplay : ShweckleDisplay = get_viewport().get_camera_2d().find_child("ShweckleDisplay")
-@onready var clockDisplay : ClockDisplay = get_viewport().get_camera_2d().find_child("ClockDisplay")
-@onready var dublingPipe : DublingPipe = get_viewport().get_camera_2d().find_child("DublingPipe")
+@onready var shweckleDisplay : ShweckleDisplay = get_tree().current_scene.find_child("ShweckleDisplay")
+@onready var clockDisplay : ClockDisplay = get_tree().current_scene.find_child("ClockDisplay")
+@onready var dublingPipe : DublingPipe = get_tree().current_scene.find_child("DublingPipe")
+
+@onready var mainMenu : MainMenu = get_tree().current_scene.find_child("MainMenu")
 
 @onready var dubois : Dubois = get_tree().current_scene.find_child("Dubois")
 

@@ -6,7 +6,14 @@ class_name Dubois
 var inPos = Vector2(266.0, 113.0)
 var outPos = Vector2(392.0, 113.0)
 
+var activePos = Vector2(266.0, 113.0)
+var menuPos = Vector2(592.0, 113.0)
+
 func _ready() -> void:
+	Ref.mainMenu.menuClosed.connect(mainMenuClosed)
+	Ref.mainMenu.menuOpened.connect(mainMenuOpened)
+
+func mainMenuClosed():
 	#Ref.dublingManager.canChangeMovement = false
 	#
 	#await speakWords("Hello! Its me Dubois! The great and mighty")
@@ -59,8 +66,11 @@ func _ready() -> void:
 	for i : Dubling in Ref.dublingManager.dublings:
 		i.recharge()
 	
-	await demandQuota(10)
+	await demandQuota(100)
 	leave()
+	
+func mainMenuOpened():
+	pass
 	
 var deltaTimer = 0.0
 func _process(delta: float) -> void:
@@ -75,6 +85,8 @@ func leave():
 	moveTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
 
 	moveTween.tween_property(self, "position", outPos, 1)
+	
+	Ref.clockDisplay.returnText()
 	
 	for i in Ref.dublingManager.dublings:
 		await get_tree().create_timer(randf_range(0.02, 0.06)).timeout
@@ -114,6 +126,13 @@ func evaluate():
 		
 	else:
 		Ref.showPopup("FAILED", Color("911c34"), Color("4a0712"))
+		Ref.clockDisplay.returnText()
+		await speakWords("Uh oh.. You didnt fulfill my demand")
+		await speakWords("Im so sorry, this is kinda sad")
+		await speakWords("I liked you i think")
+		await speakWords("Oh well!")
+		
+		Ref.mainMenu.openMenu()
 
 @onready var txtTween = create_tween()
 func speakWords(text):

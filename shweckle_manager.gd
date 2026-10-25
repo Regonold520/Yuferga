@@ -10,7 +10,19 @@ var fallMult = 1.0
 
 func _ready() -> void:
 	spawnTimer.timeout.connect(spawnTimeout)
+	Ref.mainMenu.menuClosed.connect(mainMenuClosed)
+	Ref.mainMenu.menuOpened.connect(mainMenuOpened)
 	
+func mainMenuClosed():
+	pass
+	
+func mainMenuOpened():
+	var endTween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC).set_parallel()
+	for i in shewckles.duplicate():
+		endTween.tween_property(i, "position:y", i.position.y - 20, 0.5)
+		endTween.tween_property(i, "modulate", Color(1,1,1,0), 0.5)
+		shewckles.erase(i)
+
 func createShweckle(id, overwritePos = null):
 	var newShweckle : Shweckle = load("res://sprites/shweckles/shweckle.tscn").instantiate()
 	
